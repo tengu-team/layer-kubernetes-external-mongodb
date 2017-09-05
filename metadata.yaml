@@ -1,0 +1,11 @@
+name: kubernetes-external-mongodb
+summary: This charm creates external services for Mongodb.
+maintainer: Sander Borny <sander.borny@ugent.be>
+description: |
+  This charm provides external (Mongodb) service requests to a kubernetes-deployer charm.
+requires:
+  mongodb:
+    interface: mongodb
+    scope: container
+subordinate: true
+series: ['xenial']
