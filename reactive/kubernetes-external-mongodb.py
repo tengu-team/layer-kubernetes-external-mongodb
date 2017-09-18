@@ -32,3 +32,14 @@ def mongodb_connected(mongodb):
         hostname, port = connection_info.split(':')
         configure_headless_service([hostname], port)
         set_state('k8s-external-mongodb.requested')
+
+
+@when('mongodb-service.available', 'kubernetes-deployer.available')
+def service_requested(service, deployer):
+    service.send_service_name(unitdata.kv().get('service_name', ''))
+
+
+@when('mongodb-service.available')
+@when_not('kubernetes-deployer.available')
+def service_requested(service):
+    service.send_service_name('')
